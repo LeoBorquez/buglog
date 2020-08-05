@@ -4,14 +4,6 @@ import './App.css';
 
 function App() {
 
-  state = {users: []}
-
-  componentDidMount(){
-    fetch('/users')
-    .then(res => res.json())
-    .then(users => this.setState({users}));
-  }
-
   return (
     <div className="App">
       <header className="App-header">
