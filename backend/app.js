@@ -1,7 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const fs = require('path')
+const fs = require('fs')
 const path = require('path')
 const morgan = require('morgan')
 const router = require('./routes/route')
@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended : false }))
 // parse application/json
 app.use(bodyParser.json())
 
-app.use(morgan('dev'))
+app.use(morgan('dev'));
 
 let accessLogStream = fs.createWriteStream(path.join(__dirname, '/logs/access.log'), {flags: 'a'})
 // setup the logger

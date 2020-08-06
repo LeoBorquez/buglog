@@ -1,0 +1,3 @@
+{
+    "getLogUser": "EXEC getLogUser @FechaIni = '2020-08-05', @FechaFin = '2020-08-07', @Rut = '10874571'"
+}
