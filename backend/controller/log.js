@@ -1,21 +1,18 @@
-require('dotenv').config()
-
-const { sql, poolPromise} = require('../database/db');
+const { sql, poolPromise } = require('../database/db');
 const fs = require('fs');
-const controller = require('./controller');
 
 var rawdata = fs.readFileSync('./query/queriesLog.json');
 var queries = JSON.parse(rawdata);
 
-class GetLog{
+class LogController {
 
-    async getLogUser(req, res){
-        try{
+    async getLogUser(req, res) {
+        try {
             const pool = await poolPromise
-                const result = await pool.request()
+            const result = await pool.request()
                 .query(queries.getLogUser)
-                res.json(result.recordset)
-        } catch(error){
+            res.json(result.recordset)
+        } catch (error) {
             res.status(500)
             res.send(err.message)
         }
@@ -23,5 +20,5 @@ class GetLog{
 
 }
 
-const log = new GetLog();
-module.exports = controller;
+const log = new LogController();
+module.exports = log;
