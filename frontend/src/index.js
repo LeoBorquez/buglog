@@ -3,11 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import Header from './components/Header'
+import GridData from './pages/GridData'
+
+const routing = (
+  <Router>
+    <Header/>
+    <Switch>
+      <Route exact path='/' component={App} />
+      <Route path='/results' component={GridData} />
+    </Switch>
+  </Router>
+);
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  routing,
   document.getElementById('root')
 );
 

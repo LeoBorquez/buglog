@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
@@ -8,9 +8,9 @@ import StepContent from '@material-ui/core/StepContent';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import axios from 'axios';
 
-const api = process.env.REACT_APP_API_URL
+
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -50,19 +50,6 @@ function getStepContent(step) {
 
 export default function Landing() {
 
-    const [data, setData] = useState({ hits: []});
-
-    useEffect(()=> {
-        const fetchData = async () => {
-            const result = await axios(
-                api+'/getLog',
-                );
-                setData(result.data);
-        };
-        fetchData();
-    }, []);
-
-    console.log(data);
 
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
