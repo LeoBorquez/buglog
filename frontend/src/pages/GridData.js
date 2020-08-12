@@ -36,15 +36,13 @@ export default function GridData() {
     const info = [];
 
     for (const key of Object.keys(data)) {
-
         info.push(
-            <TableRow key={data[key].errorDetalle}>
+            <TableRow key={data[key].rutCliente+key}>
                 <TableCell component="th" scope="row">
                     {data[key].rutCliente}
                 </TableCell>
             </TableRow>
-        )
-
+        )  
     }
 
 

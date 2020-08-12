@@ -12,9 +12,11 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "morgan": "^1.10.0",
-    "mssql": "^6.2.1"
+    "mssql": "^6.2.1",
+    "nodemon": "^2.0.4"
   },
   "dependencies": {
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "jw-paginate": "^1.0.4"
   }
 }
