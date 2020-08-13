@@ -11,7 +11,9 @@ class LogController {
             const pool = await poolPromise
             const result = await pool.request()
                 .query(queries.getLogUser)
-            res.json(result.recordset)
+            
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify(result.recordset, null, 2));
         } catch (error) {
             res.status(500)
             res.send(err.message)

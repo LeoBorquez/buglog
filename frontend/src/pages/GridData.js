@@ -21,7 +21,7 @@ export default function GridData() {
 
     const classes = useStyles();
 
-    const [data, setData] = useState({ hits: [] });
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -34,6 +34,10 @@ export default function GridData() {
     }, []);
 
     const info = [];
+
+    data.map(row => (
+        console.log(row)
+    ))
 
     for (const key of Object.keys(data)) {
         info.push(
