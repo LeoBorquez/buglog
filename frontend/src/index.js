@@ -12,7 +12,7 @@ const routing = (
     <Header/>
     <Switch>
       <Route exact path='/' component={App} />
-      <Route path='/results' component={GridData} />
+      <Route path={`/results/:pageNumber`} component={GridData} />
     </Switch>
   </Router>
 );

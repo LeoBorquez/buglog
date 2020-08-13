@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react'
+import { Link, useParams } from "react-router-dom";
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import Logs from '../components/Logs';
-import Pagination from '../components/Pagination';
+import Box from "@material-ui/core/Box";
+import Paper from "@material-ui/core/Paper";
+import Pagination from "@material-ui/lab/Pagination";
+import {
+    TableContainer,
+    Table,
+    TableBody,
+    TableRow,
+    TableCell,
+    TableHead,
+} from "@material-ui/core";
+import PaginationItem from "@material-ui/lab/PaginationItem";
+
+
 
 const useStyles = makeStyles({
     table: {
@@ -25,8 +31,9 @@ export default function GridData() {
 
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
     const [logsPerPage] = useState(100);
+
+    const { pageNumber = 1 } = useParams();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -40,46 +47,88 @@ export default function GridData() {
         fetchData();
     }, []);
 
-
-    const lastLog = currentPage * logsPerPage;
-    const firstLog = lastLog - logsPerPage;
-    const currentLogs = data.slice(firstLog, lastLog);
-    console.log(currentLogs)
-
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-    const info = [];
-
-    for (const key of Object.keys(data)) {
-        info.push(
-            <TableRow key={data[key].rutCliente+key}>
-                <TableCell component="th" scope="row">
-                    {data[key].rutCliente}
-                </TableCell>
-            </TableRow>
-        )  
-    }
-
+    const USER_PATH = "/results";
 
     return (
-        <TableContainer component={Paper}>
-            <Table className={classes.table} size="small" aria-label="a dense table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Usuario (Rut Cliente)</TableCell>
-                        <TableCell align="right">Calories</TableCell>
-                        <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                        <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                        <TableCell align="right">Protein&nbsp;(g)</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    
-                </TableBody>
-            </Table>
-            <Logs logs={currentLogs} loading={isLoading}/>
-            <Pagination logsPerPage={logsPerPage} totalLogs={data.length} paginate={paginate}/>
-        </TableContainer>
-        
+        <Box display="flex" flexDirection="column" flex={1}>
+            <Paper elevation={3} variant="outlined" className={classes.paper}>
+                <Box display="flex" flexDirection="column" flex={1}>
+                    <TableContainer component={Paper}>
+                        <Table className={classes.table} size="small" aria-label="a dense table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Usuario (Rut Cliente)</TableCell>
+                                    <TableCell align="left">IP Cliente</TableCell>
+                                    <TableCell align="left">Fecha</TableCell>
+                                    <TableCell align="left">Evento</TableCell>
+                                    <TableCell align="left">Error Detalle</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {(logsPerPage > 0
+                                    ? data.slice(
+                                        (Number(pageNumber) - 1) * logsPerPage,
+                                        (Number(pageNumber) - 1) * logsPerPage + logsPerPage,
+                                    )
+                                    : data
+                                ).map(dataRow => {
+                                    return (
+                                        <TableRow
+                                            key={dataRow.id}
+                                            title="tableRow"
+                                            className={classes.tableRow}
+                                            classes={{ hover: classes.hover }}
+                                            hover
+                                        >
+                                            <TableCell className={classes.tableCell}>
+                                                {dataRow.rutCliente}
+                                            </TableCell>
+                                            <TableCell align="left" className={classes.tableCell}>
+                                                {dataRow.ipCliente}
+                                            </TableCell>
+                                            <TableCell align="left" className={classes.tableCell}>
+                                                {dataRow.fecha}
+                                            </TableCell>
+                                            <TableCell align="left" className={classes.tableCell}>
+                                                {dataRow.evento}
+                                            </TableCell>
+                                            <TableCell align="left" className={classes.tableCell}>
+                                                {dataRow.errorDetalle}
+                                            </TableCell>
+                                        </TableRow>
+                                    );
+                                })}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </Box>
+                <Box
+                    display="flex"
+                    justifyContent="flex-end"
+                    flex={1}
+                    padding={1}
+                    paddingRight={10}
+                >
+                    <Pagination
+                        page={Number(pageNumber)}
+                        count={Math.ceil(data.length / logsPerPage)}
+                        shape="rounded"
+                        color="primary"
+                        showFirstButton
+                        showLastButton
+                        boundaryCount={2}
+                        renderItem={(item) => (
+                            <PaginationItem
+                                type={"start-ellipsis"}
+                                component={Link}
+                                selected
+                                to={`${USER_PATH}/${item.page}`}
+                                {...item}
+                            />
+                        )}
+                    />
+                </Box>
+            </Paper>
+        </Box>
     );
 }
