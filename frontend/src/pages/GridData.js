@@ -8,6 +8,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Logs from '../components/Logs';
+import Pagination from '../components/Pagination';
 
 const useStyles = makeStyles({
     table: {
@@ -22,22 +24,31 @@ export default function GridData() {
     const classes = useStyles();
 
     const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [logsPerPage] = useState(100);
 
     useEffect(() => {
         const fetchData = async () => {
+            setIsLoading(true)
             const result = await axios(
                 api + '/getLog',
             );
             setData(result.data);
+            setIsLoading(false);
         };
         fetchData();
     }, []);
 
-    const info = [];
 
-    data.map(row => (
-        console.log(row)
-    ))
+    const lastLog = currentPage * logsPerPage;
+    const firstLog = lastLog - logsPerPage;
+    const currentLogs = data.slice(firstLog, lastLog);
+    console.log(currentLogs)
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    const info = [];
 
     for (const key of Object.keys(data)) {
         info.push(
@@ -63,9 +74,12 @@ export default function GridData() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {info}
+                    
                 </TableBody>
             </Table>
+            <Logs logs={currentLogs} loading={isLoading}/>
+            <Pagination logsPerPage={logsPerPage} totalLogs={data.length} paginate={paginate}/>
         </TableContainer>
+        
     );
 }
