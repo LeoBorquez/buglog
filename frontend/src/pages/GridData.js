@@ -14,14 +14,18 @@ import {
     TableHead,
 } from "@material-ui/core";
 import PaginationItem from "@material-ui/lab/PaginationItem";
+import CircularProgress from '@material-ui/core/CircularProgress';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 
-
-const useStyles = makeStyles({
-    table: {
-        minWidth: 650,
+const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      '& > * + *': {
+        justifyContent: 'center'
+      },
     },
-});
+  }));
 
 const api = process.env.REACT_APP_API_URL
 
@@ -48,6 +52,18 @@ export default function GridData() {
     }, []);
 
     const USER_PATH = "/results";
+
+    if(isLoading){
+        return (
+            
+                <div className={classes.root}>
+                  <CircularProgress color="secondary" />
+                  <LinearProgress />
+                </div>
+                
+        
+        );
+    }
 
     return (
         <Box display="flex" flexDirection="column" flex={1}>
