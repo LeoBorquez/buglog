@@ -1,13 +1,14 @@
 FROM node:alpine
 
-WORKDIR /usr/app
+WORKDIR /usr/src/app
 
-COPY package.json ./
-COPY package-lock.json ./
+COPY package*.json ./
 
 RUN npm install
 
 COPY ./ ./
+
+EXPOSE 3001
 
 RUN apk add --no-cache bash
 
