@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 const api = process.env.REACT_APP_API_URL
 
-export default function GridData() {
+export default function Results() {
 
     const classes = useStyles();
 
@@ -65,6 +65,7 @@ export default function GridData() {
         );
     }
 
+    console.log(data)
     return (
         <Box display="flex" flexDirection="column" flex={1}>
             <Paper elevation={3} variant="outlined" className={classes.paper}>

@@ -5,14 +5,14 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import Header from './components/Header'
-import GridData from './pages/GridData'
+import Results from './pages/Results'
 
 const routing = (
   <Router>
     <Header/>
     <Switch>
       <Route exact path='/' component={App} />
-      <Route path={`/results/:pageNumber`} component={GridData} />
+      <Route path={`/results/:pageNumber`} component={Results} />
     </Switch>
   </Router>
 );
