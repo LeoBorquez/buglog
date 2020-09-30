@@ -20,11 +20,13 @@ class LogController {
         }
     }
 
-    async getLogGiros(){
+    async getLogGiros(req, res){
         try {
             const pool = await poolPromise
             const result = await pool.request()
                 .query(queries.getLogGiros)
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify(result.recordset, null, 2));
         } catch(err){
             res.status(500)
             res.send(err.message)

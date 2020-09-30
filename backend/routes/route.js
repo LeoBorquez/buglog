@@ -1,10 +1,11 @@
 const express = require('express')
 const controller = require('../controller/controller');
-const { getLogUser } = require('../controller/log');
+const { getLogUser, getLogGiros } = require('../controller/log');
 
 const router = express.Router();
 router.delete('/api/deleteData/:id', controller.deleteData);
 
-router.get('/getLog', getLogUser);
+router.get('/getLogUser', getLogUser);
+router.get('/getLogGiros', getLogGiros);
 
 module.exports = router;

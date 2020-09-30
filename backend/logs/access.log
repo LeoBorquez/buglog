@@ -1078,3 +1078,8 @@
 ::1 - - [15/Sep/2020:00:07:35 +0000] "GET /getLog HTTP/1.1" 200 - "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36 Edg/85.0.564.51"
 ::1 - - [23/Sep/2020:15:14:25 +0000] "GET /getLog HTTP/1.1" 500 46 "http://localhost:3000/results/1" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36 Edg/85.0.564.60"
 ::1 - - [23/Sep/2020:15:16:09 +0000] "GET /getLog HTTP/1.1" 200 - "http://localhost:3000/results/1" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36 Edg/85.0.564.60"
+::1 - - [30/Sep/2020:16:48:01 +0000] "GET /getLogGiros HTTP/1.1" - - "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36 Edg/85.0.564.63"
+::1 - - [30/Sep/2020:16:50:10 +0000] "GET /getLogUser HTTP/1.1" - - "-" "insomnia/2020.3.3"
+::1 - - [30/Sep/2020:16:50:45 +0000] "GET /getLogUser HTTP/1.1" 200 - "-" "insomnia/2020.3.3"
+::1 - - [30/Sep/2020:16:52:11 +0000] "GET /getLogGiros HTTP/1.1" - - "-" "insomnia/2020.3.3"
+::1 - - [30/Sep/2020:16:53:45 +0000] "GET /getLogGiros HTTP/1.1" 200 - "-" "insomnia/2020.3.3"
