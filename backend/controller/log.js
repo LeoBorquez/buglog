@@ -20,6 +20,17 @@ class LogController {
         }
     }
 
+    async getLogGiros(){
+        try {
+            const pool = await poolPromise
+            const result = await pool.request()
+                .query(queries.getLogGiros)
+        } catch(err){
+            res.status(500)
+            res.send(err.message)
+        }
+    }
+
 }
 
 const log = new LogController();

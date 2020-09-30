@@ -1076,3 +1076,5 @@
 ::1 - - [14/Sep/2020:21:21:20 +0000] "GET /getLog HTTP/1.1" 200 - "http://localhost:3000/results/1" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36 Edg/85.0.564.51"
 ::1 - - [14/Sep/2020:21:23:56 +0000] "GET /getLog HTTP/1.1" 200 - "http://localhost:3000/results/1" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36 Edg/85.0.564.51"
 ::1 - - [15/Sep/2020:00:07:35 +0000] "GET /getLog HTTP/1.1" 200 - "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36 Edg/85.0.564.51"
+::1 - - [23/Sep/2020:15:14:25 +0000] "GET /getLog HTTP/1.1" 500 46 "http://localhost:3000/results/1" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36 Edg/85.0.564.60"
+::1 - - [23/Sep/2020:15:16:09 +0000] "GET /getLog HTTP/1.1" 200 - "http://localhost:3000/results/1" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36 Edg/85.0.564.60"
