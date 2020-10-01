@@ -28,7 +28,7 @@ const port = 3001
 
 app.listen(process.env.PORT || port, (err) => {
     if(err)
-    console.log('Error starting the server : ' + err)
+    console.log('Error starting the server : ' + err + '\n')
     else 
-    console.log('Server started on : ' + port )
+    console.log('Server started on : ' + port + '\n')
 })

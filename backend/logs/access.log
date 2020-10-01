@@ -1083,3 +1083,5 @@
 ::1 - - [30/Sep/2020:16:50:45 +0000] "GET /getLogUser HTTP/1.1" 200 - "-" "insomnia/2020.3.3"
 ::1 - - [30/Sep/2020:16:52:11 +0000] "GET /getLogGiros HTTP/1.1" - - "-" "insomnia/2020.3.3"
 ::1 - - [30/Sep/2020:16:53:45 +0000] "GET /getLogGiros HTTP/1.1" 200 - "-" "insomnia/2020.3.3"
+::1 - - [01/Oct/2020:17:19:34 +0000] "GET /getLogUser HTTP/1.1" 200 - "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36 Edg/85.0.564.63"
+::1 - - [01/Oct/2020:17:19:37 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:3001/getLogUser" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36 Edg/85.0.564.63"

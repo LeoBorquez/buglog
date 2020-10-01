@@ -1,4 +1,4 @@
-const { sql, poolPromise } = require('../database/db');
+const { sql, poolPromiseDev, poolPromiseProd } = require('../database/db');
 const fs = require('fs');
 
 var rawdata = fs.readFileSync('./query/queriesLog.json');
@@ -8,7 +8,7 @@ class LogController {
 
     async getLogUser(req, res) {
         try {
-            const pool = await poolPromise
+            const pool = await poolPromiseDev
             const result = await pool.request()
                 .query(queries.getLogUser)
             
@@ -22,7 +22,7 @@ class LogController {
 
     async getLogGiros(req, res){
         try {
-            const pool = await poolPromise
+            const pool = await poolPromiseDev
             const result = await pool.request()
                 .query(queries.getLogGiros)
             res.setHeader('Content-Type', 'application/json');
