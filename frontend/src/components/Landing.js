@@ -1,120 +1,132 @@
-import React from 'react'
+import 'date-fns';
+import React, { useState } from 'react'
+
 
 import { makeStyles } from '@material-ui/core/styles';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import StepContent from '@material-ui/core/StepContent';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+
+import Grid from '@material-ui/core/Grid';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import DateFnsUtils from '@date-io/date-fns';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField'
+import {
+    MuiPickersUtilsProvider,
+    KeyboardDatePicker,
+} from '@material-ui/pickers';
+
+import { useHistory } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        width: '100%',
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 120,
     },
-    button: {
-        marginTop: theme.spacing(1),
-        marginRight: theme.spacing(1),
+    selectEmpty: {
+        marginTop: theme.spacing(2),
     },
-    actionsContainer: {
-        marginBottom: theme.spacing(2),
-    },
-    resetContainer: {
-        padding: theme.spacing(3),
-    },
+    selectDate: {
+        marginTop: theme.spacing(4),
+    }
 }));
 
-function getSteps() {
-    return ['Selecciona DB?', 'Selecciona una fecha', 'Estas seguro?'];
-}
 
-function getStepContent(step) {
-    switch (step) {
-        case 0:
-            return <ButtonGroup color="inherit" aria-label="outlined secondary button group">
-            <Button>Prod</Button>
-            <Button>Dev</Button>
-          </ButtonGroup>;
-        case 1:
-            return 'An ad group contains one or more ads which target a shared set of keywords.';
-        case 2:
-            return `Try out different ad text to see what brings in the most customers,
-                and learn how to enhance your ads using features like ad extensions.
-                If you run into any problems with your ads, find out how to tell if
-                they're running and how to resolve approval issues.`;
-        default:
-            return 'Unknown step';
-    }
-}
 
 export default function Landing() {
-
-
     const classes = useStyles();
-    const [activeStep, setActiveStep] = React.useState(0);
-    const steps = getSteps();
 
-    const handleNext = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        if (activeStep === 2) {
-            console.log('llamar a api')
-        }
+    let history = useHistory();
+
+    const [server, setServer] = useState(false);
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
+    const [log, setLog] = useState('getLogUser');
+
+    const handleChange = (event) => {
+        setServer(event.target.value);
     };
 
-    const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    const handleDateChange = (date) => {
+        setSelectedDate(date);
     };
 
-    const handleReset = () => {
-        setActiveStep(0);
+    const handleEndDate = (date) => {
+        setEndDate(date);
     };
 
+    const handleLogChange = (log) => {
+        setLog(log.target.value);
+    };
 
+    function request(e){
+        console.log('data')
+        history.push('/results/1')
+    }
 
     return (
         <div className={classes.root}>
             <Container justify="center" style={{ paddingTop: '15%' }}>
-                <Stepper activeStep={activeStep} orientation="vertical">
-                    {steps.map((label, index) => (
-                        <Step key={label}>
-                            <StepLabel>{label}</StepLabel>
-                            <StepContent>
-                                <Typography>{getStepContent(index)}</Typography>
-                                <div className={classes.actionsContainer}>
-                                    <div>
-                                        <Button
-                                            disabled={activeStep === 0}
-                                            onClick={handleBack}
-                                            className={classes.button}
-                                        >
-                                            Back
-                                    </Button>
-                                        <Button
-                                            variant="contained"
-                                            color="primary"
-                                            onClick={handleNext}
-                                            className={classes.button}
-                                        >
-                                            {activeStep === steps.length - 1 ? 'Finalizar' : 'Next'}
-                                        </Button>
-                                    </div>
-                                </div>
-                            </StepContent>
-                        </Step>
-                    ))}
-                </Stepper>
-                {activeStep === steps.length && (
-                    <Paper square elevation={0} className={classes.resetContainer}>
-                        <Typography>All steps completed - you&apos;re finished</Typography>
-                        <Button onClick={handleReset} className={classes.button}>
-                            Reset
-                        </Button>
-                    </Paper>
-                )}
+                <div className={classes.root}>{"Por favor elige de donde quieres obtener la info"}</div>
+                <FormControl className={classes.formControl}>
+                    <InputLabel id="input-server">Servidor</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="select-server"
+                        value={server}
+                        onChange={handleChange}
+                    >
+                        <MenuItem value={true}>PROD</MenuItem>
+                        <MenuItem value={false}>DEV</MenuItem>
+                    </Select>
+                    <Select
+                        id="select-log"
+                        value={log}
+                        onChange={handleLogChange}
+                    >
+                        <MenuItem value={'getLogUser'}>Log Usuario</MenuItem>
+                        <MenuItem value={'getLogGiros'}>Log Giros Usuario</MenuItem>
+                    </Select>
+
+                    <MuiPickersUtilsProvider utils={DateFnsUtils} className={classes.selectDate}>
+
+                        <Grid container justify="space-around">
+                            <KeyboardDatePicker
+                                disableToolbar
+                                variant="inline"
+                                format="MM/dd/yyyy"
+                                margin="normal"
+                                id="date-picker-inline"
+                                label="Desde"
+                                value={selectedDate}
+                                onChange={handleDateChange}
+                                KeyboardButtonProps={{
+                                    'aria-label': 'change date',
+                                }}
+                            />
+                            <KeyboardDatePicker
+                                margin="normal"
+                                id="date-picker-dialog"
+                                label="Hasta"
+                                format="MM/dd/yyyy"
+                                value={endDate}
+                                onChange={handleEndDate}
+                                KeyboardButtonProps={{
+                                    'aria-label': 'change date',
+                                }}
+                            />
+                        </Grid>
+                    </MuiPickersUtilsProvider>
+                   
+                    <TextField id="standard-basic" label="Rut sin guion" />
+                    <Button variant="contained" color="primary" onClick={() => { request() }}>
+                        Consultar
+                    </Button>
+                </FormControl>
+
             </Container>
 
         </div>

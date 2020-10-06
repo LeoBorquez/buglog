@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 const api = process.env.REACT_APP_API_URL
 
-export default function Results() {
+export default function Results(env, log, date, user) {
 
     const classes = useStyles();
 
