@@ -19,6 +19,7 @@ import {
 } from '@material-ui/pickers';
 
 import { useHistory } from 'react-router-dom';
+import { date } from 'date-fns/locale/af';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -42,7 +43,7 @@ export default function Landing() {
     let history = useHistory();
 
     const [server, setServer] = useState(false);
-    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [log, setLog] = useState('getLogUser');
 
@@ -51,7 +52,7 @@ export default function Landing() {
     };
 
     const handleDateChange = (date) => {
-        setSelectedDate(date);
+        setStartDate(date);
     };
 
     const handleEndDate = (date) => {
@@ -63,8 +64,9 @@ export default function Landing() {
     };
 
     function request(e){
-        console.log('data')
-        history.push('/results/1')
+        let format_startDate = startDate.getFullYear() + "-" + startDate.getMonth() + "-" + startDate.getDate()
+        console.log(format_startDate)
+        //history.push('/results/1')
     }
 
     return (
@@ -101,7 +103,7 @@ export default function Landing() {
                                 margin="normal"
                                 id="date-picker-inline"
                                 label="Desde"
-                                value={selectedDate}
+                                value={startDate}
                                 onChange={handleDateChange}
                                 KeyboardButtonProps={{
                                     'aria-label': 'change date',
