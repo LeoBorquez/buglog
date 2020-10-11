@@ -1,5 +1,6 @@
 import 'date-fns';
 import React, { useState } from 'react'
+import { formatDate } from "../utils"
 
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -52,11 +53,11 @@ export default function Landing() {
     };
 
     const handleDateChange = (date) => {
-        setStartDate(date);
+        setStartDate(formatDate(date));
     };
 
     const handleEndDate = (date) => {
-        setEndDate(date);
+        setEndDate(formatDate(date));
     };
 
     const handleLogChange = (log) => {
@@ -64,8 +65,8 @@ export default function Landing() {
     };
 
     function request(e){
-        let format_startDate = startDate.getFullYear() + "-" + startDate.getMonth() + "-" + startDate.getDate()
-        console.log(format_startDate)
+        
+        console.log(startDate)
         //history.push('/results/1')
     }
 
