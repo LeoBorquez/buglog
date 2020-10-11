@@ -48,11 +48,15 @@ export default function Landing() {
     const [endDate, setEndDate] = useState(new Date());
     const [log, setLog] = useState('getLogUser');
 
-    const handleChange = (event) => {
+    const handleChangeServer = (event) => {
         setServer(event.target.value);
     };
 
-    const handleDateChange = (date) => {
+    const handleLogChange = (log) => {
+        setLog(log.target.value);
+    };
+
+    const handleStartChange = (date) => {
         setStartDate(formatDate(date));
     };
 
@@ -60,12 +64,10 @@ export default function Landing() {
         setEndDate(formatDate(date));
     };
 
-    const handleLogChange = (log) => {
-        setLog(log.target.value);
-    };
 
-    function request(e){
-        
+
+    function request(e) {
+
         console.log(startDate)
         //history.push('/results/1')
     }
@@ -80,7 +82,7 @@ export default function Landing() {
                         labelId="demo-simple-select-label"
                         id="select-server"
                         value={server}
-                        onChange={handleChange}
+                        onChange={handleChangeServer}
                     >
                         <MenuItem value={true}>PROD</MenuItem>
                         <MenuItem value={false}>DEV</MenuItem>
@@ -94,8 +96,7 @@ export default function Landing() {
                         <MenuItem value={'getLogGiros'}>Log Giros Usuario</MenuItem>
                     </Select>
 
-                    <MuiPickersUtilsProvider utils={DateFnsUtils} className={classes.selectDate}>
-
+                    <MuiPickersUtilsProvider utils={DateFnsUtils} className={classes.selectDate}>                        
                         <Grid container justify="space-around">
                             <KeyboardDatePicker
                                 disableToolbar
@@ -105,7 +106,7 @@ export default function Landing() {
                                 id="date-picker-inline"
                                 label="Desde"
                                 value={startDate}
-                                onChange={handleDateChange}
+                                onChange={handleStartChange}
                                 KeyboardButtonProps={{
                                     'aria-label': 'change date',
                                 }}
@@ -123,8 +124,8 @@ export default function Landing() {
                             />
                         </Grid>
                     </MuiPickersUtilsProvider>
-                   
-                    <TextField id="standard-basic" label="Rut sin guion" />
+
+                    <TextField id="standard-basic" label="Rut sin digito verificador" />
                     <Button variant="contained" color="primary" onClick={() => { request() }}>
                         Consultar
                     </Button>
