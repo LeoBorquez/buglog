@@ -7,6 +7,8 @@ var queries = JSON.parse(rawdata);
 class LogController {
 
     async getLogUser(req, res) {
+        let server = req.query.server
+        console.log('es true or false --->' + server)
         try {
             const pool = await poolPromiseDev
             const result = await pool.request()

@@ -20,7 +20,6 @@ import {
 } from '@material-ui/pickers';
 
 import { useHistory } from 'react-router-dom';
-import { date } from 'date-fns/locale/af';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -47,6 +46,7 @@ export default function Landing() {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [log, setLog] = useState('getLogUser');
+    const [rut, setRut] = useState('');
 
     const handleChangeServer = (event) => {
         setServer(event.target.value);
@@ -56,7 +56,7 @@ export default function Landing() {
         setLog(log.target.value);
     };
 
-    const handleStartChange = (date) => {
+    const handleStartChange = (date) => {  
         setStartDate(formatDate(date));
     };
 
@@ -64,11 +64,18 @@ export default function Landing() {
         setEndDate(formatDate(date));
     };
 
-
-
     function request(e) {
 
-        console.log(startDate)
+        history.push({
+            pathname: '/results/1',
+            state :{
+                server : server,
+                startDate : startDate,
+                endDate : endDate,
+                log : log,
+                rut: rut
+            }
+        });
         //history.push('/results/1')
     }
 
@@ -125,7 +132,7 @@ export default function Landing() {
                         </Grid>
                     </MuiPickersUtilsProvider>
 
-                    <TextField id="standard-basic" label="Rut sin digito verificador" />
+                    <TextField id="standard-basic" label="Rut sin digito verificador" onInput={e => setRut(e.target.value)}/>
                     <Button variant="contained" color="primary" onClick={() => { request() }}>
                         Consultar
                     </Button>
