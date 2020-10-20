@@ -1,4 +1,4 @@
 {
-    "getLogUser": "EXEC getLogUser @FechaIni = '2020-08-05', @FechaFin = '2020-08-07', @Rut = '10874571'",
+    "getLogUser": "EXEC getLogUser @FechaIni = '%s', @FechaFin = '%s', @Rut = '%s'",
     "getLogGiros" : "EXEC getLogGiros @FechaIni = '2020-01-01', @FechaFin = '2020-09-07', @CodigoProducto = 37, @Rut = '8056756'"
 }
