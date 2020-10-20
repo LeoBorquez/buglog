@@ -27,6 +27,7 @@ class LogController {
 
     async getLogGiros(req, res){
         let server = req.query.server
+        let query = util.format(queries.getLogGiros, req.query.startDate, req.query.endDate, req.query.codigo, req.query.rut)
         try {
             const pool = await poolPromiseDev
             const result = await pool.request()
