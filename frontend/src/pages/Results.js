@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from "@material-ui/core/Box";
@@ -32,6 +32,7 @@ const api = process.env.REACT_APP_API_URL
 export default function Results() {
 
     const classes = useStyles();
+    const location = useLocation();
 
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -41,9 +42,16 @@ export default function Results() {
 
     useEffect(() => {
         const fetchData = async () => {
-            setIsLoading(true)
+            setIsLoading(true) 
             const result = await axios(
-                api + '/getLog',
+                api + '/' + location.state.log, {
+                    params: {
+                        server : location.state.server,
+                        startDate : location.state.startDate,
+                        endDate : location.state.endDate,
+                        rut : location.state.rut
+                    }
+                } 
             );
             setData(result.data);
             setIsLoading(false);
@@ -65,7 +73,7 @@ export default function Results() {
         );
     }
 
-    console.log(data)
+    console.log(location.state.startDate + ' ' + location.state.rut)
     return (
         <Box display="flex" flexDirection="column" flex={1}>
             <Paper elevation={3} variant="outlined" className={classes.paper}>
