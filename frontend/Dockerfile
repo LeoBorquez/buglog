@@ -3,7 +3,7 @@ FROM node:alpine as build
 WORKDIR /app
 
 # copy the react app to the container
-COPY . /app/
+COPY . .
 
 # prepare for build
 RUN npm install --silent
@@ -17,5 +17,5 @@ RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx/nginx.conf /etc/nginx/conf.d
 
 # start nginx
-EXPOSE 80
+EXPOSE 3000
 CMD ["nginx", "-g", "daemon off;"]
