@@ -1,24 +1,23 @@
 version: '3.8'
 
 services: 
-    backend:
+    buglog-backend:
         build: 
             context: ./backend
             dockerfile: Dockerfile
+        image: buglog-backend
+        container_name: buglog-backend
         ports: 
             - "3001:3001"
         restart: unless-stopped
-        volumes: 
-            - ./backend-test/node_modules:/usr/app/node_modules
-    frontend:
+    buglog-frontend:
         build:
             context: ./frontend
             dockerfile: Dockerfile
+        image: buglog-frontend
+        container_name: buglog-frontend
         ports: 
-            - "3000:3000"
+            - "3000:80"
         restart: unless-stopped
         environment: 
             CHOKIDAR_USEPOLLING: "true"
-        volumes: 
-            - ./node_modules:/usr/app/node_modules
-            - .:/usr/app
