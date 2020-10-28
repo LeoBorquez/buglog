@@ -5,6 +5,7 @@ const fs = require('fs')
 const path = require('path')
 const morgan = require('morgan')
 const router = require('./routes/route')
+const lib = require('./libs/utils')
 
 const app = express()
 
@@ -18,6 +19,7 @@ app.use(bodyParser.json())
 
 app.use(morgan('dev'));
 
+lib.createAccess();
 let accessLogStream = fs.createWriteStream(path.join(__dirname, '/logs/access.log'), {flags: 'a'})
 // setup the logger
 app.use(morgan('combined', { stream: accessLogStream}))
