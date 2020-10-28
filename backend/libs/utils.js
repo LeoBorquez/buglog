@@ -7,7 +7,7 @@ function createAccess() {
         fs.mkdir("logs", (err) => {
             if (err) return err;
 
-            fs.writeFile("./logs/acces.logs", "Access log", (err) => {
+            fs.writeFile("./logs/access.log", "Access log", (err) => {
                 if (err) return err;
 
                 console.log("File created and saved");
