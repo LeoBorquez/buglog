@@ -25,3 +25,4 @@ frontend/.DS_Store
 /frontend/yarn-error.log*
 
 .env
+node_modules
