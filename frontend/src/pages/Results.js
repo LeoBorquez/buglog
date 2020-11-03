@@ -72,8 +72,6 @@ export default function Results() {
         
         );
     }
-
-    console.log(location.state.startDate + ' ' + location.state.rut)
     return (
         <Box display="flex" flexDirection="column" flex={1}>
             <Paper elevation={3} variant="outlined" className={classes.paper}>
