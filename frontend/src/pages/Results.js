@@ -16,7 +16,7 @@ import {
 import PaginationItem from "@material-ui/lab/PaginationItem";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import ExportCSV from '../components/ExportCSV';
+import { ExportCSV } from '../components/ExportCSV';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -79,6 +79,7 @@ export default function Results() {
                 <Box display="flex" flexDirection="column" flex={1}>
                     <TableContainer component={Paper}>
                         <Table className={classes.table} size="small" aria-label="a dense table">
+                        <ExportCSV csvData={data} filename={location.state.log}></ExportCSV>
                             <TableHead>
                                 <TableRow>
                                     <TableCell>Usuario (Rut Cliente)</TableCell>
